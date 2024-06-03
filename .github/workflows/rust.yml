@@ -1,0 +1,24 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "v0.3", "builder_ci", "new_ci" ]
+  pull_request:
+    branches: [ "v0.3" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo test --verbose
+    - name: Run install
+      run: cargo install --verbose --path cargo-aoc
